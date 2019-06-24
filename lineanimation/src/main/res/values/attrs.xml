@@ -6,5 +6,6 @@
         <attr name="dashPathGap" format="dimension"/>
         <attr name="drawableAminationSpeed" format="integer"/>
         <attr name="enableDashPath" format="boolean"/>
+        <attr name="repeatable" format="boolean"/>
     </declare-styleable>
 </resources>

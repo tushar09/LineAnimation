@@ -21,11 +21,12 @@ import java.util.ArrayList;
 
 public class LineAnimation extends View{
 
-    private int PATH_COLOR;
-    private int DASH_PATH_SIZE;
-    private int DASH_PATH_GAP;
-    private int DRAWABLE_ANIMATION_SPEED;
-    private boolean ENABLE_DASH_PATH;
+    private int pathColor;
+    private int dashPathSize;
+    private int dashPathGap;
+    private int drawableAnimationSpeed;
+    private boolean enableDashPath;
+    private boolean repeatable;
 
     private Matrix matrix;
     private Bitmap arrow;
@@ -50,11 +51,12 @@ public class LineAnimation extends View{
 
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineAnimation, 0, 0);
         try {
-            PATH_COLOR = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
-            DASH_PATH_SIZE = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
-            DASH_PATH_GAP = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
-            DRAWABLE_ANIMATION_SPEED = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
-            ENABLE_DASH_PATH = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
+            pathColor = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
+            dashPathSize = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
+            dashPathGap = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
+            drawableAnimationSpeed = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
+            enableDashPath = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
+            repeatable = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, false);
         } finally {
             ta.recycle();
         }
@@ -62,8 +64,8 @@ public class LineAnimation extends View{
         line = new Path();
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        if(ENABLE_DASH_PATH){
-            paint.setPathEffect(new DashPathEffect(new float[]{DASH_PATH_SIZE, DASH_PATH_GAP}, 0));
+        if(enableDashPath){
+            paint.setPathEffect(new DashPathEffect(new float[]{dashPathSize, dashPathGap}, 0));
         }
 
         arrow = getBitmap(R.drawable.ic_arrow);
@@ -78,7 +80,7 @@ public class LineAnimation extends View{
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         line = new Path();
-        paint.setColor(PATH_COLOR);
+        paint.setColor(pathColor);
         paint.setStrokeWidth(4);
         line.moveTo(getWidth() / 2, 0);
         line.cubicTo(8, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
@@ -129,12 +131,12 @@ public class LineAnimation extends View{
             arrowXTan = coordinatesTan.get(traveler).getXf();
             arrowYTan = coordinatesTan.get(traveler).getYf();
 
-            traveler += DRAWABLE_ANIMATION_SPEED;
+            traveler += drawableAnimationSpeed;
             if(traveler > coordinates.size() - 1){
                 //arrow = null;
                 arrowX = coordinates.get(coordinates.size() - 1).getX();
                 arrowY = 16;
-                animateArrow = false;
+                //animateArrow = false;
                 traveler = 0;
             }
 
