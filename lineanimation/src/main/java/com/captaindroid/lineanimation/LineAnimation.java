@@ -84,7 +84,7 @@ public class LineAnimation extends View{
 
 
         canvas.drawPath(line, paint);
-        motionArrow();
+        motionBitmap();
 
         matrix.reset();
         float degrees = (float) (Math.atan2(arrowXTan, arrowYTan) * -180.0 / Math.PI);
@@ -100,6 +100,31 @@ public class LineAnimation extends View{
 
     }
 
+    private void motionBitmap(){
+        if(coordinates != null){
+            arrowX = coordinates.get(traveler).getX();
+            arrowY = coordinates.get(traveler).getY();
+
+            arrowXTan = coordinatesTan.get(traveler).getXf();
+            arrowYTan = coordinatesTan.get(traveler).getYf();
+
+            traveler += speed;
+            if(traveler > coordinates.size() - 1){
+                //arrow = null;
+                arrowX = coordinates.get(coordinates.size() - 1).getX();
+                arrowY = 16;
+                animateArrow = false;
+                traveler = 0;
+            }
+
+            if(!animateArrow){
+                arrowX = coordinates.get(coordinates.size() - 1).getX();
+                arrowY = 16;
+            }
+
+        }
+    }
+
     private Bitmap getBitmap(int drawableRes){
         Drawable drawable = getResources().getDrawable(drawableRes);
         Canvas canvas = new Canvas();
@@ -109,5 +134,11 @@ public class LineAnimation extends View{
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    public void startAnimateArrow(){
+        animateArrow = true;
+        invalidate();
+        requestLayout();
     }
 }
