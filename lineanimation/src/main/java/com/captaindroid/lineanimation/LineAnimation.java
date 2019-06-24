@@ -22,6 +22,8 @@ import java.util.ArrayList;
 public class LineAnimation extends View{
 
     private int PATH_COLOR;
+    private int DASH_PATH_SIZE;
+    private int DASH_PATH_GAP;
 
     private Matrix matrix;
     private Bitmap arrow;
@@ -45,22 +47,25 @@ public class LineAnimation extends View{
 
     public LineAnimation(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineAnimation, 0, 0);
+        try {
+            PATH_COLOR = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
+            DASH_PATH_SIZE = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
+            DASH_PATH_GAP = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
+        } finally {
+            ta.recycle();
+        }
+
         line = new Path();
         paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setPathEffect(new DashPathEffect(new float[]{8, 8}, 0));
+        paint.setPathEffect(new DashPathEffect(new float[]{DASH_PATH_SIZE, DASH_PATH_GAP}, 0));
         arrow = getBitmap(R.drawable.ic_arrow);
 
         this.context = context;
 
         matrix = new Matrix();
-
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineAnimation, 0, 0);
-        try {
-            PATH_COLOR = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
-        } finally {
-            ta.recycle();
-        }
 
     }
 

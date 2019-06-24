@@ -2,5 +2,7 @@
 <resources>
     <declare-styleable name="LineAnimation">
         <attr name="pathColor" format="color"/>
+        <attr name="dashPathSize" format="dimension"/>
+        <attr name="dashPathGap" format="dimension"/>
     </declare-styleable>
 </resources>
