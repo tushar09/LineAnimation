@@ -4,5 +4,6 @@
         <attr name="pathColor" format="color"/>
         <attr name="dashPathSize" format="dimension"/>
         <attr name="dashPathGap" format="dimension"/>
+        <attr name="enableDashPath" format="boolean"/>
     </declare-styleable>
 </resources>

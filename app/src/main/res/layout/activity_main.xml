@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:dashPathSize="12dp"
+        app:enableDashPath="true"
         app:dashPathGap="30dp" />
 
 </android.support.constraint.ConstraintLayout>
