@@ -1,6 +1,7 @@
 package com.captaindroid.lineanimation;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -19,6 +20,8 @@ import com.captaindroid.lineanimation.utils.Coordinates;
 import java.util.ArrayList;
 
 public class LineAnimation extends View{
+
+    private int PATH_COLOR;
 
     private Matrix matrix;
     private Bitmap arrow;
@@ -51,13 +54,21 @@ public class LineAnimation extends View{
         this.context = context;
 
         matrix = new Matrix();
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineAnimation, 0, 0);
+        try {
+            PATH_COLOR = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
+        } finally {
+            ta.recycle();
+        }
+
     }
 
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
         line = new Path();
-        paint.setColor(Color.parseColor(context.getString(R.color.dash_path)));
+        paint.setColor(PATH_COLOR);
         paint.setStrokeWidth(4);
         line.moveTo(getWidth() / 2, 0);
         line.cubicTo(8, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
