@@ -24,6 +24,7 @@ public class LineAnimation extends View{
     private int PATH_COLOR;
     private int DASH_PATH_SIZE;
     private int DASH_PATH_GAP;
+    private int DRAWABLE_ANIMATION_SPEED;
     private boolean ENABLE_DASH_PATH;
 
     private Matrix matrix;
@@ -44,8 +45,6 @@ public class LineAnimation extends View{
     private float arrowXTan;
     private float arrowYTan;
 
-    private int speed = 9;
-
     public LineAnimation(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
@@ -54,6 +53,7 @@ public class LineAnimation extends View{
             PATH_COLOR = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
             DASH_PATH_SIZE = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
             DASH_PATH_GAP = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
+            DRAWABLE_ANIMATION_SPEED = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
             ENABLE_DASH_PATH = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
         } finally {
             ta.recycle();
@@ -129,7 +129,7 @@ public class LineAnimation extends View{
             arrowXTan = coordinatesTan.get(traveler).getXf();
             arrowYTan = coordinatesTan.get(traveler).getYf();
 
-            traveler += speed;
+            traveler += DRAWABLE_ANIMATION_SPEED;
             if(traveler > coordinates.size() - 1){
                 //arrow = null;
                 arrowX = coordinates.get(coordinates.size() - 1).getX();
