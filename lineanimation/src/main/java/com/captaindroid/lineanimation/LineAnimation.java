@@ -30,7 +30,8 @@ public class LineAnimation extends View{
     private boolean enableDashPath;
     private boolean repeatable;
 
-    public static Path line;
+    public Path userPath;
+    private Path line;
 
     private Matrix matrix;
     private Bitmap arrow;
@@ -42,7 +43,7 @@ public class LineAnimation extends View{
     private int arrowY;
     private int traveler = 0;
 
-    public boolean animateArrow = false;
+    private boolean animateArrow = false;
 
     private Context context;
 
@@ -84,10 +85,10 @@ public class LineAnimation extends View{
     @Override
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
-        line = new Path();
         paint.setColor(pathColor);
         paint.setStrokeWidth(pathStrokeWidth);
-        line.moveTo(getWidth() / 2, 0);
+        line = new MyPath();
+        line.moveTo(getWidth(), 0);
         line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
 
         PathMeasure pm = new PathMeasure(line, false);
@@ -129,7 +130,7 @@ public class LineAnimation extends View{
     }
 
     private void motionBitmap(){
-        if(coordinates != null){
+        if(coordinates != null && coordinates.size() > 0){
             arrowX = coordinates.get(traveler).getX();
             arrowY = coordinates.get(traveler).getY();
 
@@ -173,6 +174,10 @@ public class LineAnimation extends View{
         animateArrow = true;
         invalidate();
         requestLayout();
+    }
+
+    public void setPath(Path line){
+        userPath = line;
     }
 
     public int getPathColor(){
@@ -237,5 +242,14 @@ public class LineAnimation extends View{
 
     public void setRepeatable(boolean repeatable){
         this.repeatable = repeatable;
+    }
+
+
+
+    private class MyPath extends android.graphics.Path{
+        @Override
+        public void moveTo(float x, float y){
+            super.moveTo(x, y);
+        }
     }
 }
