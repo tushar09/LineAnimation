@@ -25,6 +25,7 @@ public class LineAnimation extends View{
     private int dashPathSize;
     private int dashPathGap;
     private int drawableAnimationSpeed;
+    private int drawable;
     private boolean enableDashPath;
     private boolean repeatable;
 
@@ -55,6 +56,7 @@ public class LineAnimation extends View{
             dashPathSize = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
             dashPathGap = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
             drawableAnimationSpeed = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
+            drawable = ta.getResourceId(R.styleable.LineAnimation_drawable, R.drawable.ic_arrow);
             enableDashPath = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
             repeatable = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, false);
         } finally {
@@ -68,7 +70,7 @@ public class LineAnimation extends View{
             paint.setPathEffect(new DashPathEffect(new float[]{dashPathSize, dashPathGap}, 0));
         }
 
-        arrow = getBitmap(R.drawable.ic_arrow);
+        arrow = getBitmap(drawable);
 
         this.context = context;
 
