@@ -16,6 +16,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.captaindroid.lineanimation.utils.Coordinates;
+import com.captaindroid.lineanimation.utils.OnPathListener;
 
 import java.util.ArrayList;
 
@@ -87,14 +88,15 @@ public class LineAnimation extends View{
         super.onDraw(canvas);
         paint.setColor(pathColor);
         paint.setStrokeWidth(pathStrokeWidth);
-        line = new MyPath();
-        line.moveTo(getWidth(), 0);
-        line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
+        OnPathListener opl = (OnPathListener) context;
+        line = opl.setOnUpdatePath();
+        //line.moveTo(getWidth(), 0);
+        //line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
 
         PathMeasure pm = new PathMeasure(line, false);
         float aCoordinates[] = {0f, 0f};
         float aTan[] = {0f, 0f};
-        if(coordinates == null){
+        //if(coordinates == null){
             coordinates = new ArrayList<>();
             coordinatesTan = new ArrayList<>();
             for(int x = (int) pm.getLength(); x > 0; x--){
@@ -109,8 +111,7 @@ public class LineAnimation extends View{
                 c2.setYf(aTan[1]);
                 coordinatesTan.add(c2);
             }
-        }
-
+        //}
 
         canvas.drawPath(line, paint);
         motionBitmap();
@@ -121,7 +122,6 @@ public class LineAnimation extends View{
         matrix.postTranslate(arrowX - (arrow.getWidth() / 2), arrowY - (arrow.getHeight() / 2));
 
         canvas.drawBitmap(arrow, matrix, null);
-
         if(animateArrow){
             invalidate();
         }
@@ -130,33 +130,37 @@ public class LineAnimation extends View{
     }
 
     private void motionBitmap(){
-        if(coordinates != null && coordinates.size() > 0){
-            arrowX = coordinates.get(traveler).getX();
-            arrowY = coordinates.get(traveler).getY();
+        try{
+            if(coordinates != null && coordinates.size() > 0){
+                arrowX = coordinates.get(traveler).getX();
+                arrowY = coordinates.get(traveler).getY();
 
-            arrowXTan = coordinatesTan.get(traveler).getXf();
-            arrowYTan = coordinatesTan.get(traveler).getYf();
+                arrowXTan = coordinatesTan.get(traveler).getXf();
+                arrowYTan = coordinatesTan.get(traveler).getYf();
 
-            traveler += drawableAnimationSpeed;
-            if(traveler > coordinates.size() - 1){
-                //arrow = null;
-                arrowX = coordinates.get(coordinates.size() - 1).getX();
-                arrowY = 16;
-                if(repeatable){
-                    animateArrow = false;
-                }else {
-                    animateArrow = true;
+                traveler += drawableAnimationSpeed;
+                if(traveler > coordinates.size() - 1){
+                    //arrow = null;
+                    arrowX = coordinates.get(coordinates.size() - 1).getX();
+                    arrowY = coordinates.get(coordinates.size() - 1).getY();
+                    if(repeatable){
+                        animateArrow = true;
+                    }else {
+                        animateArrow = false;
+                    }
+                    traveler = 0;
                 }
-                //animateArrow = false;
-                traveler = 0;
-            }
 
-            if(!animateArrow){
-                arrowX = coordinates.get(coordinates.size() - 1).getX();
-                arrowY = 16;
+                if(!animateArrow){
+                    arrowX = coordinates.get(coordinates.size() - 1).getX();
+                    arrowY = coordinates.get(coordinates.size() - 1).getY();
+                }
+
             }
+        }catch (Exception e){
 
         }
+
     }
 
     private Bitmap getBitmap(int drawableRes){
@@ -244,12 +248,4 @@ public class LineAnimation extends View{
         this.repeatable = repeatable;
     }
 
-
-
-    private class MyPath extends android.graphics.Path{
-        @Override
-        public void moveTo(float x, float y){
-            super.moveTo(x, y);
-        }
-    }
 }
