@@ -4,6 +4,7 @@
         <attr name="pathColor" format="color"/>
         <attr name="dashPathSize" format="dimension"/>
         <attr name="dashPathGap" format="dimension"/>
+        <attr name="pathStrokeWidth" format="dimension"/>
         <attr name="drawableAminationSpeed" format="integer"/>
         <attr name="drawable" format="reference"/>
         <attr name="enableDashPath" format="boolean"/>

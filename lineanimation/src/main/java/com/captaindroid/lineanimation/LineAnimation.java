@@ -24,18 +24,20 @@ public class LineAnimation extends View{
     private int pathColor;
     private int dashPathSize;
     private int dashPathGap;
+    private int pathStrokeWidth;
     private int drawableAnimationSpeed;
     private int drawable;
     private boolean enableDashPath;
     private boolean repeatable;
 
+    public static Path line;
+
     private Matrix matrix;
     private Bitmap arrow;
-    private Path line;
     private Paint paint;
 
-    ArrayList<Coordinates> coordinates;
-    ArrayList<Coordinates> coordinatesTan;
+    private ArrayList<Coordinates> coordinates;
+    private ArrayList<Coordinates> coordinatesTan;
     private int arrowX;
     private int arrowY;
     private int traveler = 0;
@@ -55,8 +57,9 @@ public class LineAnimation extends View{
             pathColor = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
             dashPathSize = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
             dashPathGap = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
+            pathStrokeWidth = (int) ta.getDimension(R.styleable.LineAnimation_pathStrokeWidth, 4f);
             drawableAnimationSpeed = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
-            drawable = ta.getResourceId(R.styleable.LineAnimation_drawable, R.drawable.ic_arrow);
+            drawable = ta.getResourceId(R.styleable.LineAnimation_drawable, R.drawable.ic_roket);
             enableDashPath = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
             repeatable = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, false);
         } finally {
@@ -83,9 +86,9 @@ public class LineAnimation extends View{
         super.onDraw(canvas);
         line = new Path();
         paint.setColor(pathColor);
-        paint.setStrokeWidth(4);
+        paint.setStrokeWidth(pathStrokeWidth);
         line.moveTo(getWidth() / 2, 0);
-        line.cubicTo(8, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
+        line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
 
         PathMeasure pm = new PathMeasure(line, false);
         float aCoordinates[] = {0f, 0f};
@@ -170,5 +173,69 @@ public class LineAnimation extends View{
         animateArrow = true;
         invalidate();
         requestLayout();
+    }
+
+    public int getPathColor(){
+        return pathColor;
+    }
+
+    public void setPathColor(int pathColor){
+        this.pathColor = pathColor;
+    }
+
+    public int getDashPathSize(){
+        return dashPathSize;
+    }
+
+    public void setDashPathSize(int dashPathSize){
+        this.dashPathSize = dashPathSize;
+    }
+
+    public int getDashPathGap(){
+        return dashPathGap;
+    }
+
+    public void setDashPathGap(int dashPathGap){
+        this.dashPathGap = dashPathGap;
+    }
+
+    public int getPathStrokeWidth(){
+        return pathStrokeWidth;
+    }
+
+    public void setPathStrokeWidth(int pathStrokeWidth){
+        this.pathStrokeWidth = pathStrokeWidth;
+    }
+
+    public int getDrawableAnimationSpeed(){
+        return drawableAnimationSpeed;
+    }
+
+    public void setDrawableAnimationSpeed(int drawableAnimationSpeed){
+        this.drawableAnimationSpeed = drawableAnimationSpeed;
+    }
+
+    public int getDrawable(){
+        return drawable;
+    }
+
+    public void setDrawable(int drawable){
+        this.drawable = drawable;
+    }
+
+    public boolean isEnableDashPath(){
+        return enableDashPath;
+    }
+
+    public void setEnableDashPath(boolean enableDashPath){
+        this.enableDashPath = enableDashPath;
+    }
+
+    public boolean isRepeatable(){
+        return repeatable;
+    }
+
+    public void setRepeatable(boolean repeatable){
+        this.repeatable = repeatable;
     }
 }
