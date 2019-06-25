@@ -136,6 +136,11 @@ public class LineAnimation extends View{
                 //arrow = null;
                 arrowX = coordinates.get(coordinates.size() - 1).getX();
                 arrowY = 16;
+                if(repeatable){
+                    animateArrow = false;
+                }else {
+                    animateArrow = true;
+                }
                 //animateArrow = false;
                 traveler = 0;
             }
