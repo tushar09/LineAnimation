@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         app:dashPathSize="12dp"
         app:enableDashPath="true"
-        app:drawableAminationSpeed="2"
+        app:drawableAminationSpeed="5"
         app:repeatable="true"
         app:dashPathGap="12dp" />
 
