@@ -89,7 +89,7 @@ public class LineAnimation extends View{
         paint.setColor(pathColor);
         paint.setStrokeWidth(pathStrokeWidth);
         OnPathListener opl = (OnPathListener) context;
-        line = opl.setOnUpdatePath();
+        line = opl.setOnPathListener();
         //line.moveTo(getWidth(), 0);
         //line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
 
