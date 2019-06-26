@@ -24,10 +24,11 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
         lineAnimation.startAnimateArrow();
     }
 
+
     float t = 2;
     float d = 1;
     @Override
-    public Path setOnUpdatePath() {
+    public Path setOnPathListener(int bitmapPositionX, int bitmapPositionY){
         Path p = new Path();
         p.moveTo(lineAnimation.getWidth() / t, 0);
         p.cubicTo(0, lineAnimation.getHeight() / t, lineAnimation.getWidth(), lineAnimation.getHeight() / t, lineAnimation.getWidth() / t, lineAnimation.getHeight());
@@ -39,8 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
         }
 
         t += d;
-
-        Log.e("t", t + "");
         return p;
     }
 }

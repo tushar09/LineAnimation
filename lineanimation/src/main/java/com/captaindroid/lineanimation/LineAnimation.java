@@ -89,9 +89,7 @@ public class LineAnimation extends View{
         paint.setColor(pathColor);
         paint.setStrokeWidth(pathStrokeWidth);
         OnPathListener opl = (OnPathListener) context;
-        line = opl.setOnPathListener();
-        //line.moveTo(getWidth(), 0);
-        //line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
+        line = opl.setOnPathListener(arrowX, arrowY);
 
         PathMeasure pm = new PathMeasure(line, false);
         float aCoordinates[] = {0f, 0f};
@@ -125,8 +123,6 @@ public class LineAnimation extends View{
         if(animateArrow){
             invalidate();
         }
-
-
     }
 
     private void motionBitmap(){
