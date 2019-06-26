@@ -69,4 +69,25 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
 
 ```
 
+You can use getter setter method too in java class:
+```java
+//getter and setter
+animator.getPathColor();
+animator.setPathColor(int pathColor);
+animator.getDashPathSize();
+animator.setDashPathSize(int dashPathSize);
+animator.getDashPathGap();
+animator.setDashPathGap(int dashPathGap);
+animator.getPathStrokeWidth();
+animator.setPathStrokeWidth(int pathStrokeWidth);
+animator.getDrawableAnimationSpeed();
+animator.setDrawableAnimationSpeed(int drawableAnimationSpeed);
+animator.getDrawable();
+animator.setDrawable(int drawable);
+animator.isEnableDashPath();
+animator.setEnableDashPath(boolean enableDashPath);
+animator.isRepeatable();
+animator.setRepeatable(boolean repeatable);
+```
+
 Please don't forget to give it a star if you like it.
