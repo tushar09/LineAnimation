@@ -20,7 +20,7 @@ import com.captaindroid.lineanimation.utils.OnPathListener;
 
 import java.util.ArrayList;
 
-public class LineAnimation extends View{
+public class Animator extends View{
 
     private int pathColor;
     private int dashPathSize;
@@ -51,19 +51,19 @@ public class LineAnimation extends View{
     private float arrowXTan;
     private float arrowYTan;
 
-    public LineAnimation(Context context, @Nullable AttributeSet attrs) {
+    public Animator(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.LineAnimation, 0, 0);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.Animator, 0, 0);
         try {
-            pathColor = ta.getColor(R.styleable.LineAnimation_pathColor, Color.BLACK);
-            dashPathSize = (int) ta.getDimension(R.styleable.LineAnimation_dashPathSize, 30f);
-            dashPathGap = (int) ta.getDimension(R.styleable.LineAnimation_dashPathGap, 30f);
-            pathStrokeWidth = (int) ta.getDimension(R.styleable.LineAnimation_pathStrokeWidth, 4f);
-            drawableAnimationSpeed = ta.getInteger(R.styleable.LineAnimation_drawableAminationSpeed, 9);
-            drawable = ta.getResourceId(R.styleable.LineAnimation_drawable, R.drawable.ic_roket);
-            enableDashPath = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, true);
-            repeatable = ta.getBoolean(R.styleable.LineAnimation_enableDashPath, false);
+            pathColor = ta.getColor(R.styleable.Animator_pathColor, Color.BLACK);
+            dashPathSize = (int) ta.getDimension(R.styleable.Animator_dashPathSize, 30f);
+            dashPathGap = (int) ta.getDimension(R.styleable.Animator_dashPathGap, 30f);
+            pathStrokeWidth = (int) ta.getDimension(R.styleable.Animator_pathStrokeWidth, 4f);
+            drawableAnimationSpeed = ta.getInteger(R.styleable.Animator_drawableAminationSpeed, 9);
+            drawable = ta.getResourceId(R.styleable.Animator_drawable, R.drawable.ic_roket);
+            enableDashPath = ta.getBoolean(R.styleable.Animator_enableDashPath, true);
+            repeatable = ta.getBoolean(R.styleable.Animator_enableDashPath, false);
         } finally {
             ta.recycle();
         }
@@ -89,9 +89,7 @@ public class LineAnimation extends View{
         paint.setColor(pathColor);
         paint.setStrokeWidth(pathStrokeWidth);
         OnPathListener opl = (OnPathListener) context;
-        line = opl.setOnUpdatePath();
-        //line.moveTo(getWidth(), 0);
-        //line.cubicTo(0, getHeight() / 2, getWidth(), getHeight() / 2, getWidth() / 2, getHeight());
+        line = opl.setOnPathUpdateListener(arrowX, arrowY);
 
         PathMeasure pm = new PathMeasure(line, false);
         float aCoordinates[] = {0f, 0f};
@@ -125,8 +123,6 @@ public class LineAnimation extends View{
         if(animateArrow){
             invalidate();
         }
-
-
     }
 
     private void motionBitmap(){
@@ -149,6 +145,8 @@ public class LineAnimation extends View{
                         animateArrow = false;
                     }
                     traveler = 0;
+                    ((OnPathListener) context).setOnAnimationCompleteListener();
+
                 }
 
                 if(!animateArrow){
