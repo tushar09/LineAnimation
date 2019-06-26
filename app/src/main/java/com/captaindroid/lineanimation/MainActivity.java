@@ -10,28 +10,28 @@ import com.captaindroid.lineanimation.utils.OnPathListener;
 
 public class MainActivity extends AppCompatActivity implements OnPathListener {
 
-    LineAnimation lineAnimation;
+    Animator animator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        lineAnimation = findViewById(R.id.la_view);
+        animator = findViewById(R.id.la_view);
         Path p = new MyPath();
-        p.moveTo(lineAnimation.getWidth() / 2, 0);
-        p.cubicTo(0, lineAnimation.getHeight() / 2, lineAnimation.getWidth(), lineAnimation.getHeight() / 2, lineAnimation.getWidth() / 2, lineAnimation.getHeight());
-        lineAnimation.setPath(p);
-        lineAnimation.startAnimateArrow();
+        p.moveTo(animator.getWidth() / 2, 0);
+        p.cubicTo(0, animator.getHeight() / 2, animator.getWidth(), animator.getHeight() / 2, animator.getWidth() / 2, animator.getHeight());
+        animator.setPath(p);
+        animator.startAnimateArrow();
     }
 
 
     float t = 2;
     float d = 1;
     @Override
-    public Path setOnPathListener(int bitmapPositionX, int bitmapPositionY){
+    public Path setOnPathUpdateListener(int bitmapPositionX, int bitmapPositionY){
         Path p = new Path();
-        p.moveTo(lineAnimation.getWidth() / t, 0);
-        p.cubicTo(0, lineAnimation.getHeight() / t, lineAnimation.getWidth(), lineAnimation.getHeight() / t, lineAnimation.getWidth() / t, lineAnimation.getHeight());
+        p.moveTo(animator.getWidth() / t, 0);
+        p.cubicTo(0, animator.getHeight() / t, animator.getWidth(), animator.getHeight() / t, animator.getWidth() / t, animator.getHeight());
 
         if(t > 10){
             d = -0.009f;
@@ -41,5 +41,10 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
 
         t += d;
         return p;
+    }
+
+    @Override
+    public void setOnAnimationCompleteListener() {
+
     }
 }
