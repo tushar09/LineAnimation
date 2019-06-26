@@ -20,22 +20,22 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
         animator.startAnimateArrow();
 
         //getter and setter
-        animator.getPathColor();
-        animator.setPathColor(int pathColor);
-        animator.getDashPathSize();
-        animator.setDashPathSize(int dashPathSize);
-        animator.getDashPathGap();
-        animator.setDashPathGap(int dashPathGap);
-        animator.getPathStrokeWidth();
-        animator.setPathStrokeWidth(int pathStrokeWidth);
-        animator.getDrawableAnimationSpeed();
-        animator.setDrawableAnimationSpeed(int drawableAnimationSpeed);
-        animator.getDrawable();
-        animator.setDrawable(int drawable);
-        animator.isEnableDashPath();
-        animator.setEnableDashPath(boolean enableDashPath);
-        animator.isRepeatable();
-        animator.setRepeatable(boolean repeatable);
+        //animator.getPathColor();
+        //animator.setPathColor(int pathColor);
+        //animator.getDashPathSize();
+        //animator.setDashPathSize(int dashPathSize);
+        //animator.getDashPathGap();
+        //animator.setDashPathGap(int dashPathGap);
+        //animator.getPathStrokeWidth();
+        //animator.setPathStrokeWidth(int pathStrokeWidth);
+        //animator.getDrawableAnimationSpeed();
+        //animator.setDrawableAnimationSpeed(int drawableAnimationSpeed);
+        //animator.getDrawable();
+        //animator.setDrawable(int drawable);
+        //animator.isEnableDashPath();
+        //animator.setEnableDashPath(boolean enableDashPath);
+        //animator.isRepeatable();
+        //animator.setRepeatable(boolean repeatable);
 
 
     }
