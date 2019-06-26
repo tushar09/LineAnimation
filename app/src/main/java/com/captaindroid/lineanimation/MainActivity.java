@@ -10,18 +10,34 @@ import com.captaindroid.lineanimation.utils.OnPathListener;
 
 public class MainActivity extends AppCompatActivity implements OnPathListener {
 
-    Animator animator;
+    private Animator animator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         animator = findViewById(R.id.la_view);
-        Path p = new MyPath();
-        p.moveTo(animator.getWidth() / 2, 0);
-        p.cubicTo(0, animator.getHeight() / 2, animator.getWidth(), animator.getHeight() / 2, animator.getWidth() / 2, animator.getHeight());
-        animator.setPath(p);
         animator.startAnimateArrow();
+
+        //getter and setter
+        animator.getPathColor();
+        animator.setPathColor(int pathColor);
+        animator.getDashPathSize();
+        animator.setDashPathSize(int dashPathSize);
+        animator.getDashPathGap();
+        animator.setDashPathGap(int dashPathGap);
+        animator.getPathStrokeWidth();
+        animator.setPathStrokeWidth(int pathStrokeWidth);
+        animator.getDrawableAnimationSpeed();
+        animator.setDrawableAnimationSpeed(int drawableAnimationSpeed);
+        animator.getDrawable();
+        animator.setDrawable(int drawable);
+        animator.isEnableDashPath();
+        animator.setEnableDashPath(boolean enableDashPath);
+        animator.isRepeatable();
+        animator.setRepeatable(boolean repeatable);
+
+
     }
 
 
@@ -32,6 +48,11 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
         Path p = new Path();
         p.moveTo(animator.getWidth() / t, 0);
         p.cubicTo(0, animator.getHeight() / t, animator.getWidth(), animator.getHeight() / t, animator.getWidth() / t, animator.getHeight());
+        //or
+        //p.addCircle(...);
+        //p.addArc(...);
+        //p.quadTo(...);
+        //just add an return your custom path
 
         if(t > 10){
             d = -0.009f;
@@ -45,6 +66,6 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
 
     @Override
     public void setOnAnimationCompleteListener() {
-
+        // completed the animation
     }
 }

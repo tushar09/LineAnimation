@@ -30,8 +30,6 @@ public class Animator extends View{
     private int drawable;
     private boolean enableDashPath;
     private boolean repeatable;
-
-    public Path userPath;
     private Path line;
 
     private Matrix matrix;
@@ -178,9 +176,6 @@ public class Animator extends View{
         requestLayout();
     }
 
-    public void setPath(Path line){
-        userPath = line;
-    }
 
     public int getPathColor(){
         return pathColor;

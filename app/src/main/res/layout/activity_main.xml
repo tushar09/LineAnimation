@@ -11,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:dashPathSize="12dp"
+        app:dashPathGap="12dp"
+        app:pathColor="@color/colorAccent"
+        app:pathStrokeWidth="4dp"
         app:enableDashPath="true"
-        app:drawableAminationSpeed="2"
-        app:repeatable="true"
-        app:dashPathGap="12dp" />
+        app:drawableAminationSpeed="5"
+        app:repeatable="true" />
 
 </android.support.constraint.ConstraintLayout>
