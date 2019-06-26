@@ -68,3 +68,5 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
 }
 
 ```
+
+Please don't forget to give it a star if you like it.
