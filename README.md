@@ -53,6 +53,11 @@ public class MainActivity extends AppCompatActivity implements OnPathListener {
         Path p = new Path();
         p.moveTo(animator.getWidth() / 2, 0);
         p.cubicTo(0, animator.getHeight() / 2, animator.getWidth(), animator.getHeight() / 2, animator.getWidth() / 2, animator.getHeight());
+        //or
+        //p.addCircle(...);
+        //p.addArc(...);
+        //p.quadTo(...);
+        //just add an return your custom path
         return p;
     }
 
